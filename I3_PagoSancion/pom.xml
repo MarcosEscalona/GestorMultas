@@ -8,11 +8,11 @@
   </parent>
 
   <groupId>es.esi.isoft2.spartsoft.gestormultas</groupId>
-  <artifactId>I4_CambioPropietario</artifactId>
+  <artifactId>I3_PagoSancion</artifactId>
   <version>1.0.0-RELEASE</version>
   <packaging>jar</packaging>
 
-  <name>I4_CambioPropietario</name>
+  <name>I3_PagoSancion</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -58,17 +58,12 @@
     </dependency>
     <dependency>
     	<groupId>es.esi.isoft2.spartsoft.gestormultas</groupId>
-    	<artifactId>I1_AperturaExpedientes</artifactId>
-    	<version>1.0.0-RELEASE</version>
-    </dependency>
-    <dependency>
-    	<groupId>es.esi.isoft2.spartsoft.gestormultas</groupId>
     	<artifactId>I2_SancionConductor</artifactId>
     	<version>1.0.0-RELEASE</version>
     </dependency>
     <dependency>
     	<groupId>es.esi.isoft2.spartsoft.gestormultas</groupId>
-    	<artifactId>I3_PagoSancion</artifactId>
+    	<artifactId>I1_AperturaExpedientes</artifactId>
     	<version>1.0.0-RELEASE</version>
     </dependency>
   </dependencies>

@@ -8,9 +8,9 @@
  **/
 package I3_PagoSancion.Dominio;
 
-import Hito1.Persistencia.ConectorBBDD;
-import Hito2.Dominio.Conductor;
-import Hito2.Dominio.Sancion;
+import org.I1_AperturaExpedientes.Dominio.Conductor;
+import org.I1_AperturaExpedientes.Dominio.Sancion;
+import org.I1_AperturaExpedientes.Persistencia.ConectorBBDD;
 
 
 public class Dominio_PagodeSancion {

@@ -4,10 +4,9 @@
  Version: 1.0.0
  Novedades en esta version:
    - Creacion de constructor y generacion de los metodos get y set
-   - Crecion de los metodos calcularImporte(int limite, int velocidad) y calcularRestaPuntos(int limite, int velocidad)
+   - Creacion de los metodos calcularImporte(int limite, int velocidad) y calcularRestaPuntos(int limite, int velocidad)
  **/
-package Hito2.Dominio;
-
+package org.I1_AperturaExpedientes.Dominio;
 
 public class Sancion {
 

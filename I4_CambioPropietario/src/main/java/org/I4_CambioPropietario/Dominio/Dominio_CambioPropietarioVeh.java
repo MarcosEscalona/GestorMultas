@@ -6,13 +6,12 @@
    - Creacion de constructor.
    - Creacion del metodo actualizarPropietatioVehiculos
  **/
-package Hito4.Dominio;
+package org.I4_CambioPropietario.Dominio;
 
 import javax.swing.JOptionPane;
 
-import Hito1.Dominio.Propietario;
-import Hito1.Dominio.Vehiculo;
-import Hito1.Persistencia.ConectorBBDD;
+import org.I1_AperturaExpedientes.Dominio.*;
+import org.I1_AperturaExpedientes.Persistencia.ConectorBBDD;
 
 public class Dominio_CambioPropietarioVeh {
 

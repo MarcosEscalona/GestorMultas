@@ -1,8 +1,10 @@
 /**
  Clase: Foto
- Fecha: 07/11/2016
- Version: 1.0.0
- Novedades en esta version:
+ Fecha: 06/12/2016
+ Version: 1.0.1
+ Novedades version 1.0.1:
+   - Cambio tipo Fecha
+ Novedades version 1.0.0:
    - Creacion de constructor y generacion de los metodos get y set
    - Se comprueba si es una infraccion
  **/
@@ -10,12 +12,8 @@
 /**
  * Paquetes
  **/
-package Hito1.Dominio;
+package org.I1_AperturaExpedientes.Dominio;
 
-/**
- * Importaciones
- **/
-import java.util.Date;
 
 /**
  * Clase que nos permite "sacar" las fotos a los veh�culos
@@ -27,7 +25,7 @@ public class Foto {
 	private Vehiculo v;
 	private Radar r;
 	private int velocidad;
-	private Date fechayhora;
+	private String fechayhora;
 	
 	/**
 	 * Constructor
@@ -36,7 +34,7 @@ public class Foto {
 	 * @param velocidad
 	 * @param fechayhora
 	 **/
-	public Foto(Vehiculo v, Radar r, int velocidad, Date fechayhora) {
+	public Foto(Vehiculo v, Radar r, int velocidad, String fechayhora) {
 		this.v = v;
 		this.r = r;
 		this.velocidad = velocidad;
@@ -95,7 +93,7 @@ public class Foto {
 	 * Se devuelve la fecha y hora
 	 * @return fechayhora
 	 **/
-	public Date getFechayhora() {
+	public String getFechayhora() {
 		return fechayhora;
 	}
 
@@ -103,7 +101,7 @@ public class Foto {
 	 * Se asigna la fecha y hora
 	 * @param fechayhora
 	 **/
-	public void setFechayhora(Date fechayhora) {
+	public void setFechayhora(String fechayhora) {
 		this.fechayhora = fechayhora;
 	}
 	

@@ -9,7 +9,7 @@
 
   <groupId>es.esi.isoft2.spartsoft.gestormultas</groupId>
   <artifactId>I2_SancionConductor</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0-RELEASE</version>
   <packaging>jar</packaging>
 
   <name>I2_SancionConductor</name>
@@ -55,6 +55,11 @@
       <artifactId>imagecomparison</artifactId>
       <version>0.0.2</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+    	<groupId>es.esi.isoft2.spartsoft.gestormultas</groupId>
+    	<artifactId>I1_AperturaExpedientes</artifactId>
+    	<version>1.0.0-RELEASE</version>
     </dependency>
   </dependencies>
 </project>

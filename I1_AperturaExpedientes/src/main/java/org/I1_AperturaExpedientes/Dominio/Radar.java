@@ -1,24 +1,26 @@
 /**
  Clase: Radar
- Fecha: 07/11/2016
- Version: 1.0.0
- Novedades en esta version:
-   -
-   -
-   - 
+ Fecha: 06/12/2016
+ Version: 1.0.1
+ Novedades version 1.0.1:
+   - Cambio de tipo Fecha
+ Novedades version 1.0.0:
+   - Creacion de Clase
  */
-package Hito1.Dominio;
+package org.I1_AperturaExpedientes.Dominio;
 
+import java.text.ParseException;
 import java.util.Date;
 
-import Hito1.Persistencia.ConectorBBDD;
+import org.I1_AperturaExpedientes.Persistencia.*;
+import org.I1_AperturaExpedientes.Presentacion.*;
 
 /**
- * Clase donde creamos el objeto Radar que nos permitirá saber los coches que exceden la velocidad
+ * Clase donde creamos el objeto Radar que nos permitirï¿½ saber los coches que exceden la velocidad
  *
  */
 public class Radar {
-	//Atributos necesarios para identificar el radar, configurar la vel. máxima y la localización de la misma 
+	//Atributos necesarios para identificar el radar, configurar la vel. mï¿½xima y la localizaciï¿½n de la misma 
 	private int identificador;
 	private int velocidadMaxima;
 	private String localizacion;
@@ -37,15 +39,25 @@ public class Radar {
 	/**
 	 * 
 	 * @param conector
-	 * Método que se conecta con la BBDD y que realiza la foto calculando un número aleatorio, que simula la velocidad del vehículo, coge un
-	 * vehículo aleatorio al que "saca la foto" y crea una nueva foto con los datos obtenidos anterior mente
+	 * Mï¿½todo que se conecta con la BBDD y que realiza la foto calculando un nï¿½mero aleatorio, que simula la velocidad del vehï¿½culo, coge un
+	 * vehï¿½culo aleatorio al que "saca la foto" y crea una nueva foto con los datos obtenidos anterior mente
 	 * @return f devuelve la foto 
+	 * @throws ParseException 
 	 */
-	public Foto realizarFoto(ConectorBBDD conector){
+	public Foto realizarFoto(ConectorBBDD conector) throws ParseException{
 		
 		int velocidad = (int) Math.floor(Math.random()*(20-140+1)+140);		
-		Vehiculo v = conector.getVehiculoAleatorio();		
-		Foto f = new Foto(v, this, velocidad, new Date());
+		Vehiculo v = conector.getVehiculoAleatorio();	
+		
+		
+	//	SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	 //   String stringdate = dt.format(new Date());
+	  //  System.out.println("String.valueOf(date): "+stringdate);
+
+	    
+	   // Date date = dt.parse(stringdate);
+	    Date date = new Date();
+		Foto f = new Foto(v, this, velocidad, date+"");
 		
 		return f;
 	}
@@ -60,7 +72,7 @@ public class Radar {
 
 	/**
 	 * @param identificador the identificador to set
-	 * método set de la clase Radar para el atributo identificador
+	 * mï¿½todo set de la clase Radar para el atributo identificador
 	 */
 	public void setIdentificador(int identificador) {
 		this.identificador = identificador;
@@ -85,7 +97,7 @@ public class Radar {
 
 	/**
 	 * @return the localizacion
-	 * Método que devuelve la localizacion del radar
+	 * Mï¿½todo que devuelve la localizacion del radar
 	 */
 	public String getLocalizacion() {
 		return localizacion;

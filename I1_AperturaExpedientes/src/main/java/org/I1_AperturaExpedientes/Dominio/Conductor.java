@@ -4,9 +4,9 @@
  Version: 1.0.0
  Novedades en esta version:
    - Creacion de constructor y generacion de los metodos get y set
-   - Crecion del metodo restarPuntos(int puntosmenos)
+   - Creacion del metodo restarPuntos(int puntosmenos)
  **/
-package Hito2.Dominio;
+package org.I1_AperturaExpedientes.Dominio;
 
 
 public class Conductor {

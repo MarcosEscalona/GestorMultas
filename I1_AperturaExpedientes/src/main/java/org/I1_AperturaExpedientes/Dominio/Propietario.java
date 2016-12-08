@@ -5,7 +5,7 @@ Version: 1.0.0
 Novedades en esta version:
   -Creacion de constructor y generacion de los metodos get y set
 */
-package Hito1.Dominio;
+package org.I1_AperturaExpedientes.Dominio;
 
 public class Propietario {
 

@@ -1,43 +1,43 @@
 /**
  Clase: ConectorBBDD
- Fecha: 2/12/2016
- Version: 1.3.0
+ Fecha: 06/12/2016
+ Version: 1.3.1
+  Novedades version 1.3.1 :
+   - Optimizacion y eliminacion de importaciones innecesarias
  Novedades version 1.3.0 :
-   -Creacion de los metodos actualizarVehiculos() y devolverPropietario
+   - Creacion de los metodos actualizarVehiculos() y devolverPropietario
  Novedades version 1.2.0 :
-   -Creacion de los metodos devolverDatosSancionesNoPagadas(), actualizarPuntosConductor(),
+   - Creacion de los metodos devolverDatosSancionesNoPagadas(), actualizarPuntosConductor(),
    		pagarSancion(), devolverSancion()
  Novedades version 1.1.0 :
-   -Creacion de los metodos getExpedientesNoSancionados(), existeConductor(Conductor c), insertarSancion(Sancion s),
+   - Creacion de los metodos getExpedientesNoSancionados(), existeConductor(Conductor c), insertarSancion(Sancion s),
    		devolverExpediente(int id), devolverVehiculo(String matricula), devolverRadar(int id), 
    		devolverConductor(String dniConductor)
  Novedades version 1.0.0 :
-   -Creacion de los metodos ConnectorBBDD(), cerrarBBDD(), getVehiculoAleatorio(), 
+   - Creacion de los metodos ConnectorBBDD(), cerrarBBDD(), getVehiculoAleatorio(), 
     	getRadarAleatorio(), insertarExpediente(Foto aux).
- */
+ **/
 
-package Hito1.Persistencia;
+package org.I1_AperturaExpedientes.Persistencia;
 
-import java.io.IOException;
+import org.I1_AperturaExpedientes.Dominio.Conductor;
+import org.I1_AperturaExpedientes.Dominio.Expediente;
+import org.I1_AperturaExpedientes.Dominio.Foto;
+import org.I1_AperturaExpedientes.Dominio.Propietario;
+import org.I1_AperturaExpedientes.Dominio.Radar;
+import org.I1_AperturaExpedientes.Dominio.Sancion;
+import org.I1_AperturaExpedientes.Dominio.Vehiculo;
+
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.util.Date;
 
 import com.mysql.jdbc.*;
 
-import Hito1.Dominio.Foto;
-import Hito1.Dominio.Propietario;
-import Hito1.Dominio.Radar;
-import Hito1.Dominio.Vehiculo;
-import Hito2.Dominio.Conductor;
-import Hito2.Dominio.Expediente;
-import Hito2.Dominio.Sancion;
 
 /**
  * Clase que nos permite conectarnos con la Base de datos donde se guardan los
  * datos de los propietarios de los veh�culos
- *
- */
+ **/
 public class ConectorBBDD {
 
 	private Connection con;
@@ -45,9 +45,9 @@ public class ConectorBBDD {
 	private ResultSet rs;
 
 	/**
-	 * M�todo que nos permite conectarnos con la Base de datos en caso de que no
+	 * Metodo que nos permite conectarnos con la Base de datos en caso de que no
 	 * pueda nos da un error
-	 */
+	 **/
 	public ConectorBBDD() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -61,9 +61,9 @@ public class ConectorBBDD {
 	}
 
 	/**
-	 * M�todo para cerrar la conexion con la base de datos despu�s de haberla
+	 * Metodo para cerrar la conexion con la base de datos despu�s de haberla
 	 * usado
-	 */
+	 **/
 	public void cerrarBBDD() {
 		try {
 			rs.close();
@@ -140,7 +140,7 @@ public class ConectorBBDD {
 			int idRadar = aux.getR().getIdentificador();
 			int velocidad = aux.getVelocidad();
 			String fechayhora = "" + aux.getFechayhora();
-
+			
 			String consulta = "INSERT INTO expedientes VALUES (DEFAULT,'" + matricula + "', " + idRadar + ", "
 					+ velocidad + ", '" + fechayhora + "')";
 			st.executeUpdate(consulta);
@@ -158,25 +158,55 @@ public class ConectorBBDD {
 	 * 
 	 * @return
 	 */
+	/*
+	 * public String[][] getExpedientesNoSancionados() {
+	 * 
+	 * String[][] idExpedientes = new String[0][0]; int cant = 0;
+	 * 
+	 * try {
+	 * 
+	 * String consulta =
+	 * "SELECT count(expedientes.idExpediente) as cantidad,expedientes.idExpediente as idExpediente, expedientes.matricula as matricula, expedientes.fechayHora as fechayHora FROM expedientes,sanciones WHERE expedientes.idExpediente != sanciones.idExpediente"
+	 * ; rs = st.executeQuery(consulta);
+	 * 
+	 * System.out.println(rs.getInt("cantidad")); idExpedientes = new
+	 * String[rs.getInt("cantidad")][3]; while (rs.next()) {
+	 * idExpedientes[cant][0] = rs.getString("idExpediente");
+	 * idExpedientes[cant][1] = rs.getString("matricula");
+	 * idExpedientes[cant][2] = rs.getString("fechayHora"); cant++; }
+	 * 
+	 * } catch (Exception e) { System.out.
+	 * println("No se ha podido obtener los expedientes no sancionados " +
+	 * e.toString()); }
+	 * 
+	 * return idExpedientes;
+	 * 
+	 * }
+	 */
+
 	public String[][] getExpedientesNoSancionados() {
 
-		String[][] idExpedientes = new String[0][0];
+		String[][] idExpedientes = null;/* = new String[0][0]; */
 		int cant = 0;
 
 		try {
-
-			String consulta = "SELECT count(expedientes.idExpediente) as cantidad,expedientes.idExpediente as idExpediente, expedientes.matricula as matricula, expedientes.fechayHora as fechayHora FROM expedientes,sanciones WHERE expedientes.idExpediente != sanciones.idExpediente";
+			String consulta = "SELECT expedientes.idExpediente as idExpediente, expedientes.matricula as matricula, expedientes.fechayHora as fechayHora FROM expedientes WHERE expedientes.idExpediente NOT IN (SELECT sanciones.idExpediente FROM sanciones)";
+			
 			rs = st.executeQuery(consulta);
-
-			System.out.println(rs.getInt("cantidad"));
-			idExpedientes = new String[rs.getInt("cantidad")][3];
-			while (rs.next()) {
-				idExpedientes[cant][0] = rs.getString("idExpediente");
-				idExpedientes[cant][1] = rs.getString("matricula");
-				idExpedientes[cant][2] = rs.getString("fechayHora");
-				cant++;
+			rs.last();
+		
+			if (rs.getRow() > 0) {
+				
+				idExpedientes = new String[rs.getRow()][3];
+			
+				rs.first();
+				do {
+					idExpedientes[cant][0] = rs.getString("idExpediente");
+					idExpedientes[cant][1] = rs.getString("matricula");
+					idExpedientes[cant][2] = rs.getString("fechayHora");
+					cant++;
+				} while (rs.next());
 			}
-
 		} catch (Exception e) {
 			System.out.println("No se ha podido obtener los expedientes no sancionados " + e.toString());
 		}
@@ -229,7 +259,8 @@ public class ConectorBBDD {
 			}
 
 			String consulta = "INSERT INTO sanciones VALUES (DEFAULT,'" + s.getCon().getDni() + "', "
-					+ s.getExpediente() + ", " + s.getImporte() + ", " + s.getPuntosrestar() + " ," + pag + ")";
+					+ s.getExpediente().getId() + ", " + s.getImporte() + ", " + s.getPuntosrestar() + " ," + pag + ")";
+			
 			st.executeUpdate(consulta);
 
 		} catch (Exception e) {
@@ -248,16 +279,22 @@ public class ConectorBBDD {
 	public Expediente devolverExpediente(int id) {
 
 		Expediente e = null;
-
 		try {
 
-			String consulta = "SELECT * FROM expedientes where idExpediente = " + id + " ";
+			String consulta = "SELECT expedientes.matricula as matricula, expedientes.idRadar as idRadar, expedientes.velocidad as velocidad, expedientes.fechayHora as fechayHora FROM expedientes where idExpediente = '" + id + "' ";
+			
 			rs = st.executeQuery(consulta);
 			rs.next();
+			
+			int iradar = rs.getInt("idRadar");
+			int vel = rs.getInt("velocidad");
+			String fech = rs.getString("fechayHora");
+			
 			Vehiculo v = devolverVehiculo(rs.getString("matricula"));
-			Radar r = devolverRadar(rs.getInt("idRadar"));
-			e = new Expediente(id, v, r, rs.getInt("velocidad"), new Date(rs.getString("fechayHora")));
-
+			
+			Radar r = devolverRadar(iradar);
+			
+			e = new Expediente(id, v, r, vel, fech);
 		} catch (Exception ex) {
 			System.out.println("No se ha podido obtener el expediente " + ex);
 		}
@@ -332,7 +369,8 @@ public class ConectorBBDD {
 			String consulta = "SELECT puntos FROM conductores where dniConductor = '" + dniConductor + "' ";
 			rs = st.executeQuery(consulta);
 			rs.next();
-			c = new Conductor(dniConductor, rs.getInt("puntos"));
+			int puntos = rs.getInt("puntos");
+			c = new Conductor(dniConductor,puntos);
 
 		} catch (Exception ex) {
 			System.out.println("No se ha podido obtener el conductor " + ex);
@@ -356,12 +394,17 @@ public class ConectorBBDD {
 		Conductor c = null;
 
 		try {
+			String consulta = "SELECT * FROM sanciones where idSancion = '" + id + "' ";
 
-			String consulta = "SELECT * FROM sanciones where idSancion = " + id + " ";
 			rs = st.executeQuery(consulta);
 			rs.next();
-			e = devolverExpediente(rs.getInt("idExpediente"));
-			c = devolverConductor(rs.getString("dniConductor"));
+			
+			int idExp = rs.getInt("idExpediente");
+			String dni = rs.getString("dniConductor");
+			
+			e = devolverExpediente(idExp);
+			c = devolverConductor(dni);
+			
 			s = new Sancion(c, e);
 
 		} catch (Exception ex) {
@@ -415,7 +458,7 @@ public class ConectorBBDD {
 	 */
 	public String[][] devolverDatosSancionesNoPagadas() {
 
-		String[][] sanciones = new String[0][0];
+		String[][] sanciones = null;/* new String[0][0]; */
 		int cant = 0;
 
 		try {
@@ -423,18 +466,19 @@ public class ConectorBBDD {
 			String consulta = "SELECT idSancion,expedientes.matricula as matricula,expedientes.fechayHora as fechayHora, sanciones.dniConductor as conductor, sanciones.puntosarestar as puntosarestar, sanciones.importe as importe from sanciones, expedientes where pagado = 0 and sanciones.idExpediente = expedientes.idExpediente";
 			rs = st.executeQuery(consulta);
 			rs.last();
-			sanciones = new String[rs.getRow()][6];
-			rs.first();
-			do {
-				sanciones[cant][0] = "" + rs.getInt("idSancion");
-				sanciones[cant][1] = rs.getString("matricula");
-				sanciones[cant][2] = rs.getString("fechayHora");
-				sanciones[cant][3] = rs.getString("conductor");
-				sanciones[cant][4] = "" + rs.getInt("puntosarestar");
-				sanciones[cant][5] = "" + rs.getInt("importe");
-				cant++;
-			} while (rs.next());
-
+			if (rs.getRow() > 0) {
+				sanciones = new String[rs.getRow()][6];
+				rs.first();
+				do {
+					sanciones[cant][0] = "" + rs.getInt("idSancion");
+					sanciones[cant][1] = rs.getString("matricula");
+					sanciones[cant][2] = rs.getString("fechayHora");
+					sanciones[cant][3] = rs.getString("conductor");
+					sanciones[cant][4] = "" + rs.getInt("puntosarestar");
+					sanciones[cant][5] = "" + rs.getInt("importe");
+					cant++;
+				} while (rs.next());
+			}
 		} catch (Exception e) {
 			System.out.println("No se ha podido obtener las sanciones no pagadas " + e.toString());
 		}
@@ -446,7 +490,9 @@ public class ConectorBBDD {
 	// HITO 4
 
 	/**
-	 * Metodo que devuelve un propietario con los datos obtenidos de la bd a partir de un dniPropoetario pasado
+	 * Metodo que devuelve un propietario con los datos obtenidos de la bd a
+	 * partir de un dniPropoetario pasado
+	 * 
 	 * @param dniPropietario
 	 * @return
 	 */
@@ -467,16 +513,17 @@ public class ConectorBBDD {
 
 		return p;
 	}
-	
-	
+
 	/**
 	 * Metodo que pasado un vehiculo, actualiza sus valores en la bbdd
+	 * 
 	 * @param v
 	 */
 	public void actualizarVehiculos(Vehiculo v) {
 		try {
 
-			String consulta = "UPDATE vehiculo SET dniPropietario= '" + v.getPropietario().getDniPropietario() + "' where matricula = '" + v.getMatricula()+ "'";
+			String consulta = "UPDATE vehiculo SET dniPropietario= '" + v.getPropietario().getDniPropietario()
+					+ "' where matricula = '" + v.getMatricula() + "'";
 			st.executeUpdate(consulta);
 
 		} catch (Exception e) {

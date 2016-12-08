@@ -1,23 +1,23 @@
 /**
  Clase: Expediente
- Fecha: 20/11/2016
- Version: 1.0.0
- Novedades en esta version:
+ Fecha: 06/12/2016
+ Version: 1.0.1
+ Novedades version 1.0.1:
+   - Cambio en el Tipo de Fecha
+ Novedades version 1.0.0:
    - Creacion de constructor y generacion de los metodos get y set
  **/
 
 /**
  * Paquetes
  **/
-package Hito2.Dominio;
+package org.I1_AperturaExpedientes.Dominio;
 
 /**
  * Importaciones
  **/
-import java.util.Date;
+import org.I1_AperturaExpedientes.Dominio.*;
 
-import Hito1.Dominio.Radar;
-import Hito1.Dominio.Vehiculo;
 
 /**
  * Clase Expediente
@@ -29,7 +29,7 @@ public class Expediente {
 	private Vehiculo v;
 	private Radar r;
 	private int velocidad;
-	private Date fechayhora;
+	private String fechayhora;
 	
 	/**
 	 * Constructor
@@ -38,7 +38,7 @@ public class Expediente {
 	 * @param velocidad
 	 * @param fechayhora
 	 **/
-	public Expediente(int id, Vehiculo v, Radar r, int velocidad, Date fechayhora) {
+	public Expediente(int id, Vehiculo v, Radar r, int velocidad, String fechayhora) {
 		this.id = id;
 		this.v = v;
 		this.r = r;
@@ -114,7 +114,7 @@ public class Expediente {
 	 * Se devuelve la fecha y hora
 	 * @return fechayhora
 	 **/
-	public Date getFechayhora() {
+	public String getFechayhora() {
 		return fechayhora;
 	}
 
@@ -122,7 +122,7 @@ public class Expediente {
 	 * Se asigna la fecha y hora
 	 * @param fechayhora
 	 **/
-	public void setFechayhora(Date fechayhora) {
+	public void setFechayhora(String fechayhora) {
 		this.fechayhora = fechayhora;
 	}
 	

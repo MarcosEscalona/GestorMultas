@@ -6,11 +6,14 @@
    - Creacion de constructor.
    - Creacion de los metodos getExpedientes(), insertarSancion(int idExpediente, String dniConductor)
  **/
-package Hito2.Dominio;
+package org.I2_SancionConductor.Dominio;
 
+import org.I1_AperturaExpedientes.Dominio.Conductor;
+import org.I1_AperturaExpedientes.Dominio.Expediente;
+import org.I1_AperturaExpedientes.Dominio.Sancion;
 //import java.util.Date;
-import Hito1.Persistencia.ConectorBBDD;
-//import Hito1.Presentacion.AppDGT;
+import org.I1_AperturaExpedientes.Persistencia.ConectorBBDD;
+
 
 /**
  * Clase que hereda de hilos y genera fotos aleatorias

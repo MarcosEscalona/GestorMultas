@@ -4,12 +4,12 @@
   <parent>
     <artifactId>GestorMultas</artifactId>
     <groupId>es.esi.isoft2.spartsoft.gestormultas</groupId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-RELEASE</version>
   </parent>
 
   <groupId>es.esi.isoft2.spartsoft.gestormultas</groupId>
   <artifactId>I1_AperturaExpedientes</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0-RELEASE</version>
   <packaging>jar</packaging>
 
   <name>I1_AperturaExpedientes</name>
@@ -56,5 +56,12 @@
       <version>0.0.2</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>5.1.40</version>
+    <type>jar</type>
+    <scope>compile</scope>
+</dependency>
   </dependencies>
 </project>

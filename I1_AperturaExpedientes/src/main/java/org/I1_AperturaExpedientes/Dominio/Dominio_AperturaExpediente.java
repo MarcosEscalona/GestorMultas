@@ -9,14 +9,17 @@
 /**
  * Paquetes
  **/
-package Hito1.Dominio;
 
 /**
  * Importaciones
  **/
+
+
+package org.I1_AperturaExpedientes.Dominio;
+
 import java.util.Date;
-import Hito1.Persistencia.ConectorBBDD;
-import Hito1.Presentacion.Presentacion_VerActividad;
+import org.I1_AperturaExpedientes.Persistencia.ConectorBBDD;
+import org.I1_AperturaExpedientes.Presentacion.Presentacion_VerActividad;
 
 /**
  * Generacion de Fotos Aleatorias | Herencia de Hilos
